@@ -1,0 +1,46 @@
+﻿@model AESInfo
+@{
+    ViewData["Title"] = "AES 암호 생성기";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts {
+    <script>
+        $("button[name='btnCopy']").click(function () {
+            $("textarea[name='EncUserInfo']").select();
+            document.execCommand("copy");
+        });
+    </script>
+}
+<h2>@ViewData["Title"]</h2>
+
+<div class="text-info">@ViewData["Message"]</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="Data" asp-action="AES" onsubmit="btnAES.disabled = true; return true;">
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div class="form-group">
+                @Html.DisplayNameFor(m => m.UserId)
+                <input type="text" class="form-control" asp-for="UserId" placeholder="User id" autofocus />
+                <span class="text-danger" asp-validation-for="UserId"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(m => m.Password)
+                <input type="password" class="form-control" asp-for="Password" placeholder="Password" />
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(m => m.EncUserInfo)
+                <textarea class="form-control" style="height:150px;" name="EncUserInfo" placeholder="Encrypted user info" readonly="readonly">@(Model != null ? Model.EncUserInfo : string.Empty)</textarea>
+                <span class="text-danger" asp-validation-for="EncUserInfo"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(m => m.DecUserInfo)
+                <input type="text" class="form-control" name="DecUserInfo" placeholder="Decrypted user info" value="@(Model != null ? Model.DecUserInfo : string.Empty)" readonly="readonly" />
+                <span class="text-danger" asp-validation-for="DecUserInfo"></span>
+            </div>
+            <button type="submit" name="btnAES" class="btn btn-lg btn-success btn-block">AES 암호 생성하기</button>
+            <button type="button" name="btnCopy" class="btn btn-primary btn-block">암호정보 복사하기</button>
+        </form>
+    </div>
+</div>

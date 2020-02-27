@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBFirstDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="320" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="130" Nullable="false" />
+          <Property Name="IsMembershipWithdrawn" Type="bit" Nullable="false" />
+          <Property Name="JoinedUtcDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RolePriority" Type="tinyint" Nullable="false" />
+          <Property Name="ModifiedUtcDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRolesByUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OwnedUtcDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_UserRolesByUser_User_UserId">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRolesByUser" Type="Self.UserRolesByUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRolesByUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRolesByUser_UserRole_RoleId">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRolesByUser" Type="Self.UserRolesByUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRolesByUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBFirstDBModelStoreContainer">
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRolesByUser" EntityType="Self.UserRolesByUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_UserRolesByUser_User_UserId" Association="Self.FK_UserRolesByUser_User_UserId">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRolesByUser" EntitySet="UserRolesByUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRolesByUser_UserRole_RoleId" Association="Self.FK_UserRolesByUser_UserRole_RoleId">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="UserRolesByUser" EntitySet="UserRolesByUser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBFirstDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="320" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="130" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsMembershipWithdrawn" Type="Boolean" Nullable="false" />
+          <Property Name="JoinedUtcDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="UserRolesByUsers" Relationship="Self.FK_UserRolesByUser_User_UserId" FromRole="User" ToRole="UserRolesByUser" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RolePriority" Type="Byte" Nullable="false" />
+          <Property Name="ModifiedUtcDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="UserRolesByUsers" Relationship="Self.FK_UserRolesByUser_UserRole_RoleId" FromRole="UserRole" ToRole="UserRolesByUser" />
+        </EntityType>
+        <EntityType Name="UserRolesByUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OwnedUtcDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserRolesByUser_User_UserId" FromRole="UserRolesByUser" ToRole="User" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_UserRolesByUser_UserRole_RoleId" FromRole="UserRolesByUser" ToRole="UserRole" />
+        </EntityType>
+        <Association Name="FK_UserRolesByUser_User_UserId">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRolesByUser" Type="Self.UserRolesByUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRolesByUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRolesByUser_UserRole_RoleId">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserRolesByUser" Type="Self.UserRolesByUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRolesByUser">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBFirstDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="UserRolesByUsers" EntityType="Self.UserRolesByUser" />
+          <AssociationSet Name="FK_UserRolesByUser_User_UserId" Association="Self.FK_UserRolesByUser_User_UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRolesByUser" EntitySet="UserRolesByUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRolesByUser_UserRole_RoleId" Association="Self.FK_UserRolesByUser_UserRole_RoleId">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="UserRolesByUser" EntitySet="UserRolesByUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBFirstDBModelStoreContainer" CdmEntityContainer="DBFirstDBEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DBFirstDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsMembershipWithdrawn" ColumnName="IsMembershipWithdrawn" />
+                <ScalarProperty Name="JoinedUtcDate" ColumnName="JoinedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="DBFirstDBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RolePriority" ColumnName="RolePriority" />
+                <ScalarProperty Name="ModifiedUtcDate" ColumnName="ModifiedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRolesByUsers">
+            <EntityTypeMapping TypeName="DBFirstDBModel.UserRolesByUser">
+              <MappingFragment StoreEntitySet="UserRolesByUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="OwnedUtcDate" ColumnName="OwnedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
