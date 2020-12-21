@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore.Test.PasswordHasher
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore.Databases", "NetCore.Databases\NetCore.Databases.csproj", "{166590B2-2D65-4EFE-AA05-FA9DAE45A7AB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore.Web.V31", "NetCore.Web.V31\NetCore.Web.V31.csproj", "{1907C6E0-44D0-429B-92C3-6277A489C9CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore.Web.V5", "NetCore.Web.V5\NetCore.Web.V5.csproj", "{F3968A26-0E67-4CCA-8F9F-26ABCEA49E7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{166590B2-2D65-4EFE-AA05-FA9DAE45A7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{166590B2-2D65-4EFE-AA05-FA9DAE45A7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{166590B2-2D65-4EFE-AA05-FA9DAE45A7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1907C6E0-44D0-429B-92C3-6277A489C9CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1907C6E0-44D0-429B-92C3-6277A489C9CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1907C6E0-44D0-429B-92C3-6277A489C9CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1907C6E0-44D0-429B-92C3-6277A489C9CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3968A26-0E67-4CCA-8F9F-26ABCEA49E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3968A26-0E67-4CCA-8F9F-26ABCEA49E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3968A26-0E67-4CCA-8F9F-26ABCEA49E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3968A26-0E67-4CCA-8F9F-26ABCEA49E7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
