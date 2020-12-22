@@ -1,2 +1,2 @@
 # NetCore
-Udemy Course - A 10 hour C#.Net Core 2 Course in Korean
+Udemy Course - A 10 hour ASP.NET CORE(.NET 5) Course in Korean Language
