@@ -101,21 +101,27 @@ namespace NetCore.Web.V31
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            /*⭐⭐⭐⭐⭐⭐⭐⭐
+            app.UseRouting(), app.UseAuthentication(), app.UseAuthorization(),
+            app.UseSession(), app.UseEndpoints()
+            이렇게 5개의 메서드는 반드시 순서를 지켜야 올바로 작동함.
+            ⭐⭐⭐⭐⭐⭐⭐⭐*/
+
             // 아래의 app.UseEndpoints()메서드를 라우팅과 연결하기 위해 사용됨.
             app.UseRouting();
 
-            // 권한을 승인하기 위해 메서드가 추가됨.
-            app.UseAuthorization();
-            
-            #region 강의내용
+            ////강의내용
             //신원보증만
             app.UseAuthentication();
 
+            // 권한을 승인하기 위해 메서드가 추가됨.
+            app.UseAuthorization();
+
+            ////강의내용
             //세션 지정
             //System.InvalidOperationException:
             //'Session has not been configured for this application or request.'
             app.UseSession();
-            #endregion
 
             // .Net Core 2.1의 UseMvc()에서 다음과 같이 메서드명이 변경됨. 
             app.UseEndpoints(endpoints =>
