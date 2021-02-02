@@ -262,7 +262,7 @@ namespace NetCore.Web.V31.Controllers
         //[HttpGet("/LogOut")]
         // Action만 지정하던 것에서 Controller까지 같이 지정하는 것으로
         // .Net Core 3.1에서 변경됨.
-        [HttpPost("/{controller}/LogOut")]
+        [HttpGet("/{controller}/LogOut")]
         public async Task<IActionResult> LogOutAsync()
         {
             await _context.SignOutAsync(scheme: CookieAuthenticationDefaults.AuthenticationScheme);
