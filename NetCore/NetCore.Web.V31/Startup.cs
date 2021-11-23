@@ -41,10 +41,12 @@ namespace NetCore.Web.V31
 
             services.AddHttpContextAccessor();
 
+            // 2021.11.24 Migration 프로젝트 수정
+            // NetCore.Migrations => NetCore.Services
             //DB접속정보, Migrations 프로젝트 지정
             //services.AddDbContext<CodeFirstDbContext>(options =>
             //            options.UseSqlServer(connectionString: Configuration.GetConnectionString(name: "DefaultConnection"),
-            //                                 sqlServerOptionsAction: mig => mig.MigrationsAssembly(assemblyName: "NetCore.Migrations")));
+            //                                 sqlServerOptionsAction: mig => mig.MigrationsAssembly(assemblyName: "NetCore.Services")));
 
             //DB접속정보만
             services.AddDbContext<DBFirstDbContext>(options =>

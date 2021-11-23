@@ -5,13 +5,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211123172729_AddingTableTest.cs" />
+    <Compile Remove="Migrations\20211123172729_AddingTableTest.Designer.cs" />
+    <Compile Remove="Migrations\20211123174053_AddingTableTest.cs" />
+    <Compile Remove="Migrations\20211123174053_AddingTableTest.Designer.cs" />
+    <Compile Remove="Migrations\20211123174743_AddingTableTest.cs" />
+    <Compile Remove="Migrations\20211123174743_AddingTableTest.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NetCore.Data\NetCore.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
