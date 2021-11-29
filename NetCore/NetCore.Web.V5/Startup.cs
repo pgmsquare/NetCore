@@ -46,7 +46,7 @@ namespace NetCore.Web.V5
             //DB접속정보, Migrations 프로젝트 지정
             //services.AddDbContext<CodeFirstDbContext>(options =>
             //            options.UseSqlServer(connectionString: Configuration.GetConnectionString(name: "DefaultConnection"),
-            //                                 sqlServerOptionsAction: mig => mig.MigrationsAssembly(assemblyName: "NetCore.Services")));
+            //                                 sqlServerOptionsAction: mig => mig.MigrationsAssembly(assemblyName: "NetCore.V5.Services")));
 
             //DB접속정보만
             services.AddDbContext<DBFirstDbContext>(options =>

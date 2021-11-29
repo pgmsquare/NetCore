@@ -13,8 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetCore.Migrations\NetCore.Migrations.csproj" />
-    <ProjectReference Include="..\NetCore.Services\NetCore.Services.csproj" />
     <ProjectReference Include="..\NetCore.Utilities\NetCore.Utilities.csproj" />
+    <ProjectReference Include="..\NetCore.V5.Services\NetCore.V5.Services.csproj" />
   </ItemGroup>
 
 </Project>
