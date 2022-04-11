@@ -1,8 +1,4 @@
-﻿@{ 
-    string controllerName = Common.GetRouteDataVal(ViewContext.RouteData, "controller");
-    string actionName = Common.GetRouteDataVal(ViewContext.RouteData, "action");
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,10 +32,7 @@
                             </li>
                             <li class="nav-item">
                                 @* .Net Core 3.1에서 asp-action="LogOutAsync" 속성값이 다음과 같이 변경됨.*@
-                                @*멤버십 로그아웃 a link를 form과 button으로 변경함.*@
-                                <form class="form-inline" asp-area="" asp-controller="Membership" asp-action="LogOut" asp-route-cont="@controllerName" asp-route-act="@actionName" method="post">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">멤버십 로그아웃</button>
-                                </form>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Membership" asp-action="LogOut">멤버십 로그아웃</a>
                             </li>
                         }
                         else

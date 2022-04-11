@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore.Web.V5", "NetCore.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore.V5.Services", "NetCore.V5.Services\NetCore.V5.Services.csproj", "{34763FAE-D7E0-4600-8B9C-8722B6994D40}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore.Web.V6", "NetCore.Web.V6\NetCore.Web.V6.csproj", "{65A62F20-298B-4A77-B880-A55E1A08CC1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{34763FAE-D7E0-4600-8B9C-8722B6994D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34763FAE-D7E0-4600-8B9C-8722B6994D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34763FAE-D7E0-4600-8B9C-8722B6994D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A62F20-298B-4A77-B880-A55E1A08CC1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A62F20-298B-4A77-B880-A55E1A08CC1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A62F20-298B-4A77-B880-A55E1A08CC1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A62F20-298B-4A77-B880-A55E1A08CC1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

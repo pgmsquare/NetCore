@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using NetCore.Data.ViewModels;
-using NetCore.Services.Interfaces;
+using NetCore.V5.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

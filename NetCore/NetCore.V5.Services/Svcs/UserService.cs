@@ -47,21 +47,35 @@ namespace NetCore.V5.Services.Svcs
             //FromSql
 
             ////TABLE
+            //user = _context.Users.FromSql("SELECT UserId, UserName, UserEmail, Password, IsMembershipWithdrawn, JoinedUtcDate FROM dbo.[User]")
+            //                     .Where(c => c.UserId.Equals(userId) && c.Password.Equals(password))
+            //                     .FirstOrDefault();
+            // 버전업
             //user = _context.Users.FromSqlRaw("SELECT UserId, UserName, UserEmail, Password, IsMembershipWithdrawn, JoinedUtcDate FROM dbo.[User]")
             //                     .Where(c => c.UserId.Equals(userId) && c.Password.Equals(password))
             //                     .FirstOrDefault();
 
             ////VIEW
+            //user = _context.Users.FromSql("SELECT UserId, UserName, UserEmail, Password, IsMembershipWithdrawn, JoinedUtcDate FROM dbo.uvwUser")
+            //                     .Where(c => c.UserId.Equals(userId) && c.Password.Equals(password))
+            //                     .FirstOrDefault();
+            // 버전업
             //user = _context.Users.FromSqlRaw("SELECT UserId, UserName, UserEmail, Password, IsMembershipWithdrawn, JoinedUtcDate FROM dbo.uvwUser")
             //                     .Where(c => c.UserId.Equals(userId) && c.Password.Equals(password))
             //                     .FirstOrDefault();
 
             ////FUNCTION
-            //user = _context.Users.FromSqlRaw($"SELECT UserId, UserName, UserEmail, Password, IsMembershipWithdrawn, JoinedUtcDate FROM dbo.ufnUser({userId},{password})")
+            //user = _context.Users.FromSql($"SELECT UserId, UserName, UserEmail, Password, IsMembershipWithdrawn, JoinedUtcDate FROM dbo.ufnUser({userId},{password})")
+            //                     .FirstOrDefault();
+            // 버전업 + SQL Injection 방지
+            //user = _context.Users.FromSqlInterpolated($"SELECT UserId, UserName, UserEmail, Password, IsMembershipWithdrawn, JoinedUtcDate FROM dbo.ufnUser({userId},{password})")
             //                     .FirstOrDefault();
 
             //STORED PROCEDURE
-            user = _context.Users.FromSqlRaw("dbo.uspCheckLoginByUserId @p0, @p1", new[] { userId, password })
+            //user = _context.Users.FromSql("dbo.uspCheckLoginByUserId @p0, @p1", new[] { userId, password })
+            //                     .FirstOrDefault();
+            // 버전업 + SQL Injection 방지
+            user = _context.Users.FromSqlInterpolated($"dbo.uspCheckLoginByUserId {userId}, {password}")
                                  .FirstOrDefault();
 
             if (user == null)
@@ -70,11 +84,14 @@ namespace NetCore.V5.Services.Svcs
                 int rowAffected;
 
                 //SQL문 직접 작성
-                //rowAffected = _context.Database.ExecuteSqlRaw($"Update dbo.[User] SET AccessFailedCount += 1 WHERE UserId={userId}");
+                //rowAffected = _context.Database.ExecuteSqlCommand($"Update dbo.[User] SET AccessFailedCount += 1 WHERE UserId={userId}");
+                // 버전업 + SQL Injection 방지
+                rowAffected = _context.Database.ExecuteSqlInterpolated($"Update dbo.[User] SET AccessFailedCount += 1 WHERE UserId={userId}");
 
                 //STORED PROCEDURE
-                rowAffected = _context.Database.ExecuteSqlRaw("dbo.FailedLoginByUserId @p0", parameters: new[] { userId });
-
+                //rowAffected = _context.Database.ExecuteSqlCommand("dbo.FailedLoginByUserId @p0", parameters: new[] { userId });
+                // 버전업 + SQL Injection 방지
+                rowAffected = _context.Database.ExecuteSqlInterpolated($"dbo.FailedLoginByUserId {userId}");
             }
 
             return user;
