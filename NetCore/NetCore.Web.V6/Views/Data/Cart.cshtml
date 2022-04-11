@@ -1,0 +1,36 @@
+﻿@model List<ItemInfo>
+@{
+    ViewData["Title"] = "장바구니";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script>
+        $("button[name='btnAdd']").click(function () {
+            frmItems.action = "@Url.Action("AddCart", "Data")";
+        });
+
+        $("button[name='btnRemove']").click(function () {
+            frmItems.action = "@Url.Action("RemoveCart", "Data")";
+         });
+    </script>
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form id="frmItems" method="post" onsubmit="btnAdd.disabled = true; btnRemove.disabled = true; return true;">
+    <ul>
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <li>상품번호 : @item.ItemNo, 상품명: @item.ItemName</li>
+            }
+        }
+        else
+        {
+            <li class="text-info">@ViewData["Message"]</li>
+        }
+    </ul>
+    <button type="submit" name="btnAdd">상품 추가</button>
+    <button type="submit" name="btnRemove">상품 제거</button>
+</form>

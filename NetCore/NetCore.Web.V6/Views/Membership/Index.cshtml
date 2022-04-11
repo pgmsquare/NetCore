@@ -1,0 +1,40 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "멤버십";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string controllerName = Common.GetRouteDataVal(ViewContext.RouteData, "controller");
+    string actionName = Common.GetRouteDataVal(ViewContext.RouteData, "action");
+
+    string userId = string.Empty;
+    string userRoleId = string.Empty;
+    string[] userDataInfos = new[] { string.Empty, string.Empty, string.Empty, string.Empty };
+
+    if (Context.User.Claims.Any())
+    {
+        userId = User.FindFirst(claim => claim.Type.Equals(ClaimTypes.Name)).Value;
+        userRoleId = User.FindFirst(claim => claim.Type.Equals(ClaimTypes.Role)).Value;
+        userDataInfos = User.FindFirst(claim => claim.Type.Equals(ClaimTypes.UserData)).Value.Split("|");
+    }
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="text-info">@Html.Raw(TempData["Message"])</div>
+
+<div class="text-danger">@Html.Raw(ViewData["Message"])</div>
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <div class="text-danger">@($"{userId}({userDataInfos[2]})님의 권한은 {userRoleId}({userDataInfos[0]})입니다.")</div>
+    @* .Net Core 3.1에서 asp-action="LogOutAsync", asp-action="WithdrawnAsync" 속성값이 다음과 같이 변경됨.*@
+    @*멤버십 로그아웃 a link 부분을 form과 button으로 수정함.*@
+    <form class="form-inline" asp-area="" asp-controller="Membership" asp-action="LogOut" asp-route-cont="@controllerName" asp-route-act="@actionName" method="post">
+        <button type="submit" class="btn btn-primary">멤버십 로그아웃</button>
+    </form>
+    <form method="post" asp-controller="Membership" asp-action="Withdrawn" onsubmit="btnWithdrawn.disabled = true; return true;">
+        <input type="hidden" name="UserId" value="@Context.User.Identity.Name" />
+        <input type="password" name="Password" placeholder="Password" value="" autofocus />
+        <button type="submit" name="btnWithdrawn" class="btn btn-danger">멤버십 사용자 탈퇴</button>
+    </form>
+}
