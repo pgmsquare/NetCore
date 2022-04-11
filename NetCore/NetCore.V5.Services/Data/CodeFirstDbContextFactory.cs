@@ -16,9 +16,8 @@ namespace NetCore.V5.Services.Data
          * 관리하도록 하기 위해 수동으로 파일경로를 지정합니다.
          * 수강생 여러분들은 각자의 웹프로젝트 위치로 변경하시면 됩니다.
          */
-        private const string _configPath =
-                @"D:\Repository\pgmsquare\NetCore\NetCore\NetCore.Web.V5\appsettings.json";
-
+        private const string _configPath = @"D:\Repository\pgmsquare\NetCore\NetCore\NetCore.Web.V5\appsettings.json";
+        
         public CodeFirstDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CodeFirstDbContext>();
