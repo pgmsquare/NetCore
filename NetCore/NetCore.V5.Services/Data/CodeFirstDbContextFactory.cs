@@ -17,7 +17,7 @@ namespace NetCore.V5.Services.Data
          * 수강생 여러분들은 각자의 웹프로젝트 위치로 변경하시면 됩니다.
          */
         private const string _configPath =
-                @"D:\Repository\jsootv\NetCore\NetCore\NetCore.Web.V5\appsettings.json";
+                @"D:\Repository\pgmsquare\NetCore\NetCore\NetCore.Web.V5\appsettings.json";
 
         public CodeFirstDbContext CreateDbContext(string[] args)
         {
